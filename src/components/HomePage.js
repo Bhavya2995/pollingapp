@@ -36,7 +36,7 @@ class HomePage extends Component {
             <CardActions>
               <Link to="/signup">
                 <FlatButton
-                  label="Sign Up"
+                  label="Click here to Sign Up"
                   fullWidth={true}
                   backgroundColor="#1b1d26"
                   style={{ color: "white" }}
