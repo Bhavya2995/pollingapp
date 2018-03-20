@@ -1,10 +1,10 @@
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./types";
-
+import {ADDUSER_BASEURL} from '../config'
 export const signUp = userDetails => async dispatch => {
   dispatch({ type: SIGNUP_REQUEST, payload: userDetails });
 
   const res = await fetch(
-    `https://secure-refuge-14993.herokuapp.com/add_user?username=${
+    `${ADDUSER_BASEURL}?username=${
       userDetails.username
     }&password=${userDetails.password}&role=${userDetails.role}`
   );
