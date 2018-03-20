@@ -1,1 +1,1 @@
-export const ADDUSER_BASEURL = "https://secure-refuge-14993.herokuapp.com/add_user";
+export const BASEURL = "https://secure-refuge-14993.herokuapp.com/";
