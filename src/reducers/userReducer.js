@@ -1,6 +1,6 @@
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_INFO } from "../actions/types";
 
-export default function(state = {}, action) {
+export default function(state = {registering: false}, action) {
   switch (action.type) {
     case SIGNUP_REQUEST:
       return { registering: true };
