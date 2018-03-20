@@ -1,1 +1,3 @@
-export const SIGNUP_USER = 'SIGNUP_USER';
+export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_INFO = 'SIGNUP_INFO';

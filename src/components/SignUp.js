@@ -5,7 +5,7 @@ import TextField from "material-ui/TextField";
 import FlatButton from "material-ui/FlatButton";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
-import { Card, CardActions, CardTitle, CardText } from "material-ui/Card";
+import { Card, CardTitle } from "material-ui/Card";
 import Header from "./Header";
 import AlertBox from "./AlertBox";
 
@@ -18,7 +18,6 @@ class SignUp extends Component {
         password: ""
       },
       value: 1,
-      success: false,
       errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,61 +59,77 @@ class SignUp extends Component {
     if (!data.data.password) errors.password = "Password is required";
     return errors;
   }
+
+  renderAlert(userData){
+    if(userData.error === 0){
+      return ( <AlertBox message="You have been registered successfully!" />);
+    }
+    else if( userData.error === 1){
+      return (<AlertBox message = "Username already taken. Try different Username!" url = "no" /> );
+    }
+  }
   render() {
     const { data, value, errors } = this.state;
     const { userData } = this.props;
+     
     return (
       <div>
         <Header />
         <div className="container">
           <div className="row">
             <div className="col-md-4 offset-md-4">
-              <Card className = "text-center pb-3">
-                <CardTitle title="Sign Up Form" titleStyle = {{fontSize:'20px', color : "#3a3939"}}/>
-                <div className = "container">
-                <TextField
-                  floatingLabelText="Username"
-                  floatingLabelFixed={true}
-                  name="username"
-                  value={data.username}
-                  onChange={this.handleChange}
-                  errorText={errors.username}
-                  fullWidth = {true}
+              <Card className="text-center pb-3">
+                <CardTitle
+                  title="Create Your Account"
+                  titleStyle={{ fontSize: "20px", color: "#3a3939" }}
                 />
-                <br />
+                <div className="container">
+                  <TextField
+                    floatingLabelText="Username"
+                    floatingLabelFixed={true}
+                    name="username"
+                    value={data.username}
+                    onChange={this.handleChange}
+                    errorText={errors.username}
+                    fullWidth={true}
+                    style={{ textAlign: "left" }}
+                  />
+                  <br />
 
-                <TextField
-                  type="password"
-                  floatingLabelText="Password"
-                  floatingLabelFixed={true}
-                  name="password"
-                  value={data.password}
-                  onChange={this.handleChange}
-                  errorText={errors.password}
-                  fullWidth = {true}
-                />
-                <br />
-                <SelectField
-                  floatingLabelText="Role"
-                  value={value}
-                  onChange={this.handleRoleChange}
-                  style = {{textAlign:'left'}}
-                  fullWidth = {true}
-                >
-                  <MenuItem value={1} primaryText="Admin" />
-                  <MenuItem value={2} primaryText="Staff" />
-                </SelectField>
-                <br />
-                <FlatButton
-                  label="Sign Up"
-                  primary={true}
-                  onClick={this.handleSubmit}
-                />
+                  <TextField
+                    type="password"
+                    floatingLabelText="Password"
+                    floatingLabelFixed={true}
+                    name="password"
+                    value={data.password}
+                    onChange={this.handleChange}
+                    errorText={errors.password}
+                    fullWidth={true}
+                    style={{ textAlign: "left" }}
+                  />
+                  <br />
+                  <SelectField
+                    floatingLabelText="Role"
+                    value={value}
+                    onChange={this.handleRoleChange}
+                    style={{ textAlign: "left" }}
+                    fullWidth={true}
+                  >
+                    <MenuItem value={1} primaryText="Admin" />
+                    <MenuItem value={2} primaryText="Staff" />
+                  </SelectField>
+                  <br />
+                  <FlatButton
+                    label="Sign Up"
+                    primary={true}
+                    onClick={this.handleSubmit}
+                  />
                 </div>
               </Card>
-              {userData.error === 0 ? (
-                <AlertBox message="You have been registered successfully!" />
-              ) : null}
+              <br />
+              <br />
+              {userData.registering && <span className = "lead" style ={{color:'#4b4e51'}}>Please Wait...</span>}
+              {this.renderAlert(userData)}
             </div>
           </div>
         </div>

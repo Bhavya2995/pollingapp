@@ -1,7 +1,7 @@
 import React from "react";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default class AlertBox extends React.Component {
   state = {
@@ -17,7 +17,13 @@ export default class AlertBox extends React.Component {
 
   render() {
     const actions = [
-      <Link to = "/"><FlatButton label="OK" primary={true} /></Link>,
+      this.props.url === "no" ? (
+        <FlatButton label="OK" primary={true} onClick={this.handleClose} />
+      ) : (
+        <Link to="/">
+          <FlatButton label="OK" primary={true} />
+        </Link>
+      )
     ];
 
     return (
