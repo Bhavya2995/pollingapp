@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardActions, CardTitle, CardText } from "material-ui/Card";
+import { Card, CardActions, CardTitle } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
+import Header from './Header';
+import { resetState } from '../actions';
+import { connect } from 'react-redux'
+
 
 const style = {
   stylePage: {
@@ -9,11 +13,7 @@ const style = {
     backgroundColor: "#edf2f9",
     backgroundRepeat: "repeat-y"
   },
-  styleHeader: {
-    border: "1px solid",
-    backgroundColor: "#121926",
-    color: "white"
-  },
+
   styleCard: {
     borderRadius: "5px",
     backgroundColor: "#d6ddff"
@@ -21,14 +21,15 @@ const style = {
 };
 
 class HomePage extends Component {
+  componentDidMount(){
+    this.props.resetState();
+  }
   render() {
     return (
       <div style={style.stylePage}>
-        <header className="mb-5" style={style.styleHeader}>
-          <h1 className="display-4 text-center">Polling App</h1>
-        </header>
+        <Header />
         <div className="container">
-          <Card className="col-sm-4 offset-sm-4 pb-1" style={style.styleCard}>
+          <Card className="col-md-4 offset-md-4 pb-1" style={style.styleCard}>
             <CardTitle
               title="Sign Up Here For App"
               titleStyle={{ fontSize: "18px" }}
@@ -64,4 +65,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default connect(null,{resetState})(HomePage);
