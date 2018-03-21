@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardActions, CardTitle } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 import Header from './Header';
-import { resetState } from '../actions';
+import { resetState,logout } from '../actions';
 import { connect } from 'react-redux'
 
 
@@ -23,6 +23,7 @@ const style = {
 class HomePage extends Component {
   componentDidMount(){
     this.props.resetState();
+    this.props.logout();
   }
   render() {
     return (
@@ -65,4 +66,4 @@ class HomePage extends Component {
   }
 }
 
-export default connect(null,{resetState})(HomePage);
+export default connect(null,{resetState,logout})(HomePage);
