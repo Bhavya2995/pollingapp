@@ -4,7 +4,9 @@ export const userService = {
   signup,
   login,
   logout,
-  fetchusers
+  fetchusers,
+  fetchpolls,
+  fetchpoll
 };
 
 function signup(userDetails) {
@@ -42,4 +44,12 @@ function logout() {
 
 function fetchusers() {
   return fetch(`${BASEURL}list_users`).then(res => res.json());
+}
+
+function fetchpolls() {
+  return fetch(`${BASEURL}list_polls`).then(res => res.json());
+}
+
+function fetchpoll(id) {
+  return fetch(`${BASEURL}list_poll?id=${id}`).then(res => res.json());
 }
