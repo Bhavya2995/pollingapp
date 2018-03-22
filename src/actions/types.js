@@ -7,3 +7,5 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = "LOGOUT";
 
 export const FETCH_USERS = "FETCH_USERS";
+export const FETCH_POLLS = "FETCH_POLLS";
+export const FETCH_POLL = "FETCH_POLL";

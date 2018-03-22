@@ -1,6 +1,6 @@
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_INFO } from "./types";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./types";
-import { FETCH_USERS } from "./types";
+import { FETCH_USERS, FETCH_POLLS, FETCH_POLL } from "./types";
 import { userService } from "../service";
 import history from "../history";
 
@@ -34,4 +34,16 @@ export const fetchUsers = () => dispatch => {
   userService.fetchusers().then(data => {
     dispatch({ type: FETCH_USERS, payload: data });
   });
+};
+
+export const fetchPolls = () => dispatch => {
+  userService
+    .fetchpolls()
+    .then(data => dispatch({ type: FETCH_POLLS, payload: data }));
+};
+
+export const fetchPoll = id => dispatch => {
+  userService
+    .fetchpoll(id)
+    .then(data => dispatch({ type: FETCH_POLL, payload: data }));
 };

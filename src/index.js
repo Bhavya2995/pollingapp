@@ -13,6 +13,9 @@ import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp";
 import LoginPage from "./components/LoginPage";
 import MainPage from "./components/MainPage";
+import PollView from "./components/PollView";
+import AddPoll from "./components/AddPoll";
+import Pollslist from "./components/Pollslist";
 import registerServiceWorker from "./registerServiceWorker";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,6 +30,9 @@ ReactDOM.render(
     <MuiThemeProvider>
       <Router history={history}>
         <Switch>
+        <PrivateRoute path="/pollslist" component={Pollslist} />
+          <PrivateRoute path="/addpoll" component={AddPoll} />
+          <PrivateRoute path="/polls/:id" component={PollView} />
           <PrivateRoute path="/main" component={MainPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={SignUp} />
