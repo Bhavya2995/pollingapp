@@ -3,7 +3,8 @@ import { BASEURL } from "../config";
 export const userService = {
   signup,
   login,
-  logout
+  logout,
+  fetchusers
 };
 
 function signup(userDetails) {
@@ -37,4 +38,8 @@ function login(userDetails) {
 
 function logout() {
   localStorage.removeItem("user");
+}
+
+function fetchusers() {
+  return fetch(`${BASEURL}list_users`).then(res => res.json());
 }
