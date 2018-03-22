@@ -1,5 +1,6 @@
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_INFO } from "./types";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./types";
+import { FETCH_USERS } from "./types";
 import { userService } from "../service";
 import history from "../history";
 
@@ -27,4 +28,10 @@ export const login = userDetails => dispatch => {
 export const logout = () => {
   userService.logout();
   return { type: LOGOUT };
+};
+
+export const fetchUsers = () => dispatch => {
+  userService.fetchusers().then(data => {
+    dispatch({ type: FETCH_USERS, payload: data });
+  });
 };
