@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
 
-const NavBar = () => {
+
+const NavBar = ({auth}) => {
   return (
     <div>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-5">
@@ -10,6 +12,9 @@ const NavBar = () => {
         </div>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
+          <li className="nav-item ">
+              <span className="nav-link">{auth.user.user_id}</span>
+            </li>
           <li className="nav-item ">
               <Link className="nav-link" to = "/pollslist">List of Polls</Link>
             </li>
@@ -27,4 +32,6 @@ const NavBar = () => {
     </div>
   );
 };
-export default NavBar;
+
+const mapStateToProps = ({auth}) =>({auth});
+export default connect(mapStateToProps)(NavBar);

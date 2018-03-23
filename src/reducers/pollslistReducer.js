@@ -5,10 +5,6 @@ export default function(state = [], action) {
     case FETCH_POLLS:
       return action.payload.data;
 
-      break;
-      case FETCH_POLL:
-      return action.payload.data;
-
     default:
       return state;
       break;
