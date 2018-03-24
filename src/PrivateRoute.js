@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import decode from "jwt-decode";
 import jwt from 'jsonwebtoken';
-import {SECRET_KEY} from "./config";
+import {SECRET_KEY} from "./keys";
 
 let user = JSON.parse(localStorage.getItem("user"));
 if(user){
