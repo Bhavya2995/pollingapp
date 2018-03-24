@@ -19,7 +19,7 @@ jwt.verify(token,SECRET_KEY,function(err,decode){
     {...rest}
     render={props =>
 
-    (check !== "Invalid")
+    (check !== "Invalid" && user)
     ? (
         <Component {...props} />
       ) : (

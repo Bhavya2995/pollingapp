@@ -1,7 +1,6 @@
 import { BASEURL } from "../config";
 import decode from "jwt-decode";
-import setAuthorizationToken from './setAuthToken';
-
+import setAuthorizationToken from "./setAuthToken";
 
 export const userService = {
   signup,
@@ -9,7 +8,8 @@ export const userService = {
   logout,
   fetchusers,
   fetchpolls,
-  fetchpoll
+  fetchpoll,
+  addpoll
 };
 
 function signup(userDetails) {
@@ -55,4 +55,10 @@ function fetchpolls() {
 
 function fetchpoll(id) {
   return fetch(`${BASEURL}list_poll?id=${id}`).then(res => res.json());
+}
+
+function addpoll(title, optionString) {
+  return fetch(
+    `${BASEURL}add_poll?title=${title}&options=${optionString}`
+  ).then(res => res.json());
 }
