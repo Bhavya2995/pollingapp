@@ -1,7 +1,8 @@
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_INFO } from "./types";
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./types";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "./types";
 import { FETCH_USERS, FETCH_POLLS, FETCH_POLL } from "./types";
 import { userService } from "../service";
+import decode from "jwt-decode";
 import history from "../history";
 
 export const signUp = userDetails => dispatch => {
@@ -20,8 +21,12 @@ export const login = userDetails => dispatch => {
   dispatch({ type: LOGIN_REQUEST, payload: userDetails });
 
   userService.login(userDetails).then(user => {
-    dispatch({ type: LOGIN_SUCCESS, payload: user });
-    history.push("/main");
+    if (user.error === 1) {
+      dispatch({ type: LOGIN_FAILURE, payload: user });
+    } else {
+      dispatch({ type: LOGIN_SUCCESS, payload: user });
+      history.push("/main");
+    }
   });
 };
 

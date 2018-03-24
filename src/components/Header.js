@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const styleHeader = {
@@ -10,7 +11,9 @@ const Header = () => {
     <div>
       <header className="mb-5" style={styleHeader}>
         <h1 className="display-4 text-center">
-          Polling App
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            Polling App
+          </Link>
         </h1>
       </header>
     </div>

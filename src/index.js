@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
-import { PrivateRoute } from "./PrivateRoute";
+import  PrivateRoute  from "./PrivateRoute";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";

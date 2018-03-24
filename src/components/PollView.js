@@ -10,13 +10,14 @@ class PollView extends Component {
     return (
       <div>
       <NavBar />
-        <div>{this.props.polls.title}</div>
-        <div>{this.props.polls._id}</div>
-        <div>{this.props.polls.date}</div>
+      <div className = "display-4 text-center">{this.props.poll.title}</div>
+        <div>{this.props.poll.title}</div>
+        <div>{this.props.poll._id}</div>
+        <div>{this.props.poll.date}</div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ polls }) => ({ polls });
+const mapStateToProps = ({ poll }) => ({ poll });
 export default connect(mapStateToProps, { fetchPoll })(PollView);

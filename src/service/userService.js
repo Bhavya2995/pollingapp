@@ -1,4 +1,7 @@
 import { BASEURL } from "../config";
+import decode from "jwt-decode";
+import setAuthorizationToken from './setAuthToken';
+
 
 export const userService = {
   signup,
@@ -33,7 +36,7 @@ function login(userDetails) {
       if (user && user.token) {
         localStorage.setItem("user", JSON.stringify(user));
       }
-
+      setAuthorizationToken(user.token);
       return user;
     });
 }
