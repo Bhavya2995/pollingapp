@@ -10,6 +10,7 @@ class PollView extends Component {
     return (
       <div>
       <NavBar />
+      <div className = "display-4 text-center">{this.props.poll.title}</div>
         <div>{this.props.poll.title}</div>
         <div>{this.props.poll._id}</div>
         <div>{this.props.poll.date}</div>

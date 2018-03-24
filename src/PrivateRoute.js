@@ -1,14 +1,25 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import decode from "jwt-decode";
-// import setAuthorizationToken from "./service/setAuthToken";
+import jwt from 'jsonwebtoken';
+import {SECRET_KEY} from "./config";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+let user = JSON.parse(localStorage.getItem("user"));
+if(user){
+let token = user.token;
+var check;
+jwt.verify(token,SECRET_KEY,function(err,decode){
+  if(err){
+    check = "Invalid"
+  }
+})
+}
+ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-    //   (decode(localStorage.getItem("user"))!== undefined) 
-    (localStorage.getItem('user'))
+
+    (check !== "Invalid")
     ? (
         <Component {...props} />
       ) : (
@@ -19,3 +30,6 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
+
+// const mapStateToProps = ({auth}) => ({auth});
+export default PrivateRoute;
