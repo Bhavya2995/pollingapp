@@ -1,6 +1,7 @@
 import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_INFO } from "./types";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "./types";
 import { FETCH_USERS, FETCH_POLLS, FETCH_POLL } from "./types";
+import { ADD_POLL } from "./types";
 import { userService } from "../service";
 import decode from "jwt-decode";
 import history from "../history";
@@ -51,4 +52,10 @@ export const fetchPoll = id => dispatch => {
   userService
     .fetchpoll(id)
     .then(data => dispatch({ type: FETCH_POLL, payload: data }));
+};
+
+export const addPoll = (title, optionString) => dispatch => {
+  userService
+    .addpoll(title, optionString)
+    .then(data => dispatch({ type: ADD_POLL, payload: data }));
 };
