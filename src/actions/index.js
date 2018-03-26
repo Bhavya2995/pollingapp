@@ -65,17 +65,25 @@ export const updatePollTitle = (id, title) => dispatch => {
   userService
     .updatepolltitle(id, title)
     .then(data => dispatch({ type: UPDATE_POLLTITLE, payload: data }));
+  userService
+    .fetchpoll(id)
+    .then(data => dispatch({ type: FETCH_POLL, payload: data }));
 };
 
 export const addOptionPoll = (id, option) => dispatch => {
   userService
     .addoptionpoll(id, option)
     .then(data => dispatch({ type: ADD_OPTION, payload: data }));
+  userService
+    .fetchpoll(id)
+    .then(data => dispatch({ type: FETCH_POLL, payload: data }));
 };
 
 export const deleteOptionPoll = (id, option) => dispatch => {
   userService
     .deleteoptionpoll(id, option)
     .then(data => dispatch({ type: DELETE_OPTION, payload: data }));
-  console.log("working");
+  userService
+    .fetchpoll(id)
+    .then(data => dispatch({ type: FETCH_POLL, payload: data }));
 };

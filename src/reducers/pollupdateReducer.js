@@ -3,7 +3,11 @@ import { UPDATE_POLLTITLE, ADD_OPTION, DELETE_OPTION } from "../actions/types";
 export default function(state = {}, action) {
   switch (action.type) {
     case UPDATE_POLLTITLE:
-      return action.payload;
+    if (action.payload.error === 0) {
+        return { updated: true };
+      } else {
+        return { updated: false };
+      }
 
       break;
     case ADD_OPTION:
@@ -14,7 +18,11 @@ export default function(state = {}, action) {
       }
       break;
     case DELETE_OPTION:
-      return action.payload;
+    if (action.payload.error === 0) {
+        return { deleted: true };
+      } else {
+        return { deleted: false };
+      }
     default:
       return state;
       break;

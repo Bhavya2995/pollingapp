@@ -10,7 +10,9 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
-import AlertBox from './AlertBox';
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentRemove from "material-ui/svg-icons/content/remove";
+import AlertBox from "./AlertBox";
 
 class DeletePollOpt extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class DeletePollOpt extends Component {
   }
   handleDelete = e => {
     this.props.deleteOptionPoll(this.props.id, this.state.option);
+    // window.location.reload();
   };
   isSelected = index => {
     return this.state.selected.indexOf(index) !== -1;
@@ -35,14 +38,12 @@ class DeletePollOpt extends Component {
   };
 
   handleClickCell = (row, col, e) => {
-    console.log(e.target.dataset.myRowIdentifier);
     this.setState({
       option: this.props.options[e.target.dataset.myRowIdentifier].option
     });
   };
 
   render() {
-    console.log(this.state.selected, this.state.option);
     return (
       <div>
         <div className="lead mb-3">Select an option to Delete</div>
@@ -66,7 +67,6 @@ class DeletePollOpt extends Component {
                           children={option.option}
                         />
                       </TableRow>
-                      
                     ))}
                   </TableBody>
                 </Table>
@@ -74,18 +74,18 @@ class DeletePollOpt extends Component {
             </div>
           </div>
         ) : null}
-        <br/>
+        <br />
         <RaisedButton
           label="Delete Poll Option"
           primary={true}
           onClick={this.handleDelete}
         />
-        {
-            (this.props.pollupdate.error===0)?<AlertBox url = "no" message = "Poll Option Deleted" /> : null 
-        }
+        {this.props.pollupdate.deleted ? (
+          <AlertBox url="no" message="Poll Option Deleted" />
+        ) : null}
       </div>
     );
   }
 }
-const mapStateToProps = ({pollupdate}) => ({pollupdate});
+const mapStateToProps = ({ pollupdate }) => ({ pollupdate });
 export default connect(mapStateToProps, { deleteOptionPoll })(DeletePollOpt);

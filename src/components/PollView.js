@@ -23,7 +23,7 @@ class PollView extends Component {
       option: ""
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPoll(this.props.match.params.id);
   }
 
@@ -42,12 +42,14 @@ class PollView extends Component {
   };
 
   handleTitleSubmit = e => {
-    console.log("Sadf");
     this.props.updatePollTitle(this.props.match.params.id, this.state.title);
+    this.handleClose();
+    // window.location.reload();
   };
 
   handleAddOption = e => {
     this.props.addOptionPoll(this.props.match.params.id, this.state.option);
+    // window.location.reload();
   };
 
   render() {
@@ -62,9 +64,11 @@ class PollView extends Component {
     return (
       <div>
         <NavBar />
+
         <div className="display-4 text-center mb-5">
           {this.props.poll.title} Details
         </div>
+
         <div className="container">
           <div className="row">
             <div className="col-md-6 offset-md-3">
@@ -91,6 +95,9 @@ class PollView extends Component {
                       onChange={this.handleChange}
                     />
                   </Dialog>
+                  {this.props.pollupdate.updated ? (
+                    <AlertBox url="no" message="Title has been updated" />
+                  ) : null}
                 </div>
                 <div className="lead mb-3">
                   <TextField
@@ -105,7 +112,7 @@ class PollView extends Component {
                     primary={true}
                     onClick={this.handleAddOption}
                   />
-                  {this.props.pollupdate.added  ? (
+                  {this.props.pollupdate.added ? (
                     <AlertBox url="no" message="Poll option added" />
                   ) : null}
                 </div>
