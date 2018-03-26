@@ -7,7 +7,11 @@ export default function(state = {}, action) {
 
       break;
     case ADD_OPTION:
-      return action.payload;
+      if (action.payload.error === 0) {
+        return { added: true };
+      } else {
+        return { added: false };
+      }
       break;
     case DELETE_OPTION:
       return action.payload;

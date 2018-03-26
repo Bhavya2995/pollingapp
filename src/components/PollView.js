@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchPoll, updatePollTitle, addOptionPoll,deleteOptionPoll } from "../actions";
+import { fetchPoll, updatePollTitle, addOptionPoll } from "../actions";
 import NavBar from "./NavBar";
 import RaisedButton from "material-ui/RaisedButton";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import TextField from "material-ui/TextField/TextField";
-
+import DeletePollOpt from "./DeletePollOpt";
+import AlertBox from "./AlertBox";
 const style = {
   styleButton: {
     marginLeft: "10px"
@@ -48,10 +49,7 @@ class PollView extends Component {
   handleAddOption = e => {
     this.props.addOptionPoll(this.props.match.params.id, this.state.option);
   };
-  handleDelete = (e) =>{
 
-    this.props.deleteOptionPoll(this.props.match.params.id,"testingnewoption")
-  }
   render() {
     const actions = [
       <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
@@ -72,7 +70,7 @@ class PollView extends Component {
             <div className="col-md-6 offset-md-3">
               <div className="lead mb-3">Poll ID : {this.props.poll._id}</div>
               <div className="lead mb-3">
-                Title : {this.props.poll.title}
+                Poll Title : {this.props.poll.title}
                 <div>
                   <RaisedButton
                     label="Update Title"
@@ -95,10 +93,6 @@ class PollView extends Component {
                   </Dialog>
                 </div>
                 <div className="lead mb-3">
-                  {/* Options:
-                {this.props.poll.options.map((option,index)=>(
-                  <div key = {index}>{option.option}</div>
-                ))} */}
                   <TextField
                     type="text"
                     floatingLabelText="Add New Option"
@@ -111,15 +105,16 @@ class PollView extends Component {
                     primary={true}
                     onClick={this.handleAddOption}
                   />
+                  {this.props.pollupdate.added  ? (
+                    <AlertBox url="no" message="Poll option added" />
+                  ) : null}
                 </div>
-                {/* {this.props.poll.options.map((option,index)=>(
-                  <div key = {index}>{option.option}</div>
-                ))} } */}
-                <RaisedButton
-                    label="Delete Poll Option"
-                    primary={true}
-                    onClick={this.handleDelete}
+                {this.props.poll.options ? (
+                  <DeletePollOpt
+                    id={this.props.match.params.id}
+                    options={this.props.poll.options}
                   />
+                ) : null}
               </div>
             </div>
           </div>
@@ -129,10 +124,9 @@ class PollView extends Component {
   }
 }
 
-const mapStateToProps = ({ poll }) => ({ poll });
+const mapStateToProps = ({ poll, pollupdate }) => ({ poll, pollupdate });
 export default connect(mapStateToProps, {
   fetchPoll,
   updatePollTitle,
-  addOptionPoll,
-  deleteOptionPoll
+  addOptionPoll
 })(PollView);
