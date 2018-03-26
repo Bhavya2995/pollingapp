@@ -10,7 +10,9 @@ export const userService = {
   fetchpolls,
   fetchpoll,
   addpoll,
-  updatepolltitle
+  updatepolltitle,
+  addoptionpoll,
+  deleteoptionpoll
 };
 
 function signup(userDetails) {
@@ -66,6 +68,18 @@ function addpoll(title, optionString) {
 
 function updatepolltitle(id, title) {
   return fetch(`${BASEURL}update_poll_title?id=${id}&title=${title}`).then(
+    res => res.json()
+  );
+}
+
+function addoptionpoll(id, option) {
+  return fetch(`${BASEURL}add_new_option?id=${id}&option_text=${option}`).then(
+    res => res.json()
+  );
+}
+
+function deleteoptionpoll(id,option){
+  return fetch(`${BASEURL}delete_poll_option?id=${id}&option_text=${option}`).then(
     res => res.json()
   );
 }

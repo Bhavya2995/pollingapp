@@ -14,3 +14,5 @@ export const FETCH_POLL = "FETCH_POLL";
 export const ADD_POLL = "ADD_POLL";
 
 export const UPDATE_POLLTITLE = "UPDATE_POLLTITLE";
+export const ADD_OPTION = "ADD_OPTION";
+export const DELETE_OPTION = "DELETE_OPTION";

@@ -1,8 +1,8 @@
-import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_INFO } from "./types";
+import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_INFO} from "./types";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "./types";
 import { FETCH_USERS, FETCH_POLLS, FETCH_POLL } from "./types";
 import { ADD_POLL } from "./types";
-import { UPDATE_POLLTITLE } from "./types";
+import { UPDATE_POLLTITLE, ADD_OPTION, DELETE_OPTION } from "./types";
 import { userService } from "../service";
 import decode from "jwt-decode";
 import history from "../history";
@@ -66,3 +66,12 @@ export const updatePollTitle = (id, title) => dispatch => {
     .updatepolltitle(id, title)
     .then(data => dispatch({ type: UPDATE_POLLTITLE, payload: data }));
 };
+
+export const addOptionPoll = (id,option) => dispatch => {
+  userService.addoptionpoll(id,option).then(data => dispatch({type: ADD_OPTION, payload :data}));
+}
+
+export const deleteOptionPoll = (id,option) => dispatch => {
+  userService.deleteoptionpoll(id,option).then(data => dispatch({type: DELETE_OPTION,payload : data}));
+  console.log("working")
+}

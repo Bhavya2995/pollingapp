@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchPoll ,updatePollTitle} from "../actions";
+import { fetchPoll, updatePollTitle, addOptionPoll,deleteOptionPoll } from "../actions";
 import NavBar from "./NavBar";
 import RaisedButton from "material-ui/RaisedButton";
 import Dialog from "material-ui/Dialog";
@@ -18,7 +18,8 @@ class PollView extends Component {
     super(props);
     this.state = {
       open: false,
-      title: ""
+      title: "",
+      option: ""
     };
   }
   componentWillMount() {
@@ -28,9 +29,9 @@ class PollView extends Component {
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  handleUpdate = e => {
-    console.log("working");
-  };
+  // handleUpdate = e => {
+  //   console.log("working");
+  // };
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -39,10 +40,17 @@ class PollView extends Component {
     this.setState({ open: false });
   };
 
-  handleTitleSubmit = (e) =>{
+  handleTitleSubmit = e => {
     console.log("Sadf");
-    this.props.updatePollTitle(this.props.match.params.id,this.state.title);
-    
+    this.props.updatePollTitle(this.props.match.params.id, this.state.title);
+  };
+
+  handleAddOption = e => {
+    this.props.addOptionPoll(this.props.match.params.id, this.state.option);
+  };
+  handleDelete = (e) =>{
+
+    this.props.deleteOptionPoll(this.props.match.params.id,"testingnewoption")
   }
   render() {
     const actions = [
@@ -63,7 +71,7 @@ class PollView extends Component {
           <div className="row">
             <div className="col-md-6 offset-md-3">
               <div className="lead mb-3">Poll ID : {this.props.poll._id}</div>
-              <div className="lead">
+              <div className="lead mb-3">
                 Title : {this.props.poll.title}
                 <div>
                   <RaisedButton
@@ -86,6 +94,32 @@ class PollView extends Component {
                     />
                   </Dialog>
                 </div>
+                <div className="lead mb-3">
+                  {/* Options:
+                {this.props.poll.options.map((option,index)=>(
+                  <div key = {index}>{option.option}</div>
+                ))} */}
+                  <TextField
+                    type="text"
+                    floatingLabelText="Add New Option"
+                    name="option"
+                    value={this.state.option}
+                    onChange={this.handleChange}
+                  />
+                  <RaisedButton
+                    label="Add Options"
+                    primary={true}
+                    onClick={this.handleAddOption}
+                  />
+                </div>
+                {/* {this.props.poll.options.map((option,index)=>(
+                  <div key = {index}>{option.option}</div>
+                ))} } */}
+                <RaisedButton
+                    label="Delete Poll Option"
+                    primary={true}
+                    onClick={this.handleDelete}
+                  />
               </div>
             </div>
           </div>
@@ -96,4 +130,9 @@ class PollView extends Component {
 }
 
 const mapStateToProps = ({ poll }) => ({ poll });
-export default connect(mapStateToProps, { fetchPoll ,updatePollTitle})(PollView);
+export default connect(mapStateToProps, {
+  fetchPoll,
+  updatePollTitle,
+  addOptionPoll,
+  deleteOptionPoll
+})(PollView);
